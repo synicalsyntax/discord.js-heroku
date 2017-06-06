@@ -85,6 +85,11 @@ you to use as references, including:
 
 * `index.js` ([link](https://github.com/synicalsyntax/discord.js-heroku/blob/master/index.js))
 
+    This file contains the source code for the **Discord.js Heroku** bot on my
+    [bot testing server](https://discord.gg/unYyTF9), which serves as a demo of
+    the instructions in this guide; it utilizes Heroku's [environment
+    variables](https://devcenter.heroku.com/articles/config-vars).
+
 ### About me
 
 I'm active member of the Discord.js community on Discord and also a freelance
