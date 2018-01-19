@@ -38,12 +38,6 @@ It's optimal for hosting a bot for several reasons:
     Heroku account for hosting your bot so your other applications don't take up
     its hosting time.
 
-    * **Apps sleep after 30 minutes of inactivity**; this limitation can be
-    easily bypassed by hosting a [web application](#building-a-web-app)
-    alongside your bot with [Express](https://github.com/expressjs/express), and
-    doing so means you also get a website to advertise your bot on. Pretty cool,
-    right?
-
 * **Easily deployable** — You can configure Heroku in two ways that allow you
 to easily deploy any changes made to your bot:
 
@@ -72,6 +66,9 @@ and should not be included while entering commands in the command line prompt.
 * This guide is primarily uses the Heroku CLI (rather than the web interface) to
 interact with Heroku.
 
+* It's possible to run your bot in parallel with a web server! See the [web](https://github.com/synicalsyntax/discord.js-heroku/tree/web) branch for
+more information.
+
 ### About this repository
 
 This repository also contains several example files mentioned in this guide for
@@ -86,15 +83,9 @@ you to use as references, including:
 * `index.js` ([link](https://github.com/synicalsyntax/discord.js-heroku/blob/master/index.js))
 
     This file contains the source code for the **Discord.js Heroku** bot on my
-    [bot testing server](https://discord.gg/unYyTF9), which serves as a demo of
+    [bot testing server](https://discord.gg/PJCDeXQ), which serves as a demo of
     the instructions in this guide; it utilizes Heroku's [environment
     variables](https://devcenter.heroku.com/articles/config-vars).
-
-### About me
-
-I'm active member of the Discord.js community on Discord and also a freelance
-bot developer, so if you're interested in a personal, customized Discord bot,
-message me on Discord at **synicalsyntax#9944** for further discussion.
 
 ## Getting started
 
@@ -103,7 +94,7 @@ message me on Discord at **synicalsyntax#9944** for further discussion.
 Before you get started, make sure you have:
 
 * [installed](https://docs.npmjs.com/getting-started/installing-node) Node
-(version >= v4.0.0) and npm (you better have, also how would you even know that
+(version >= v8.0.0) and npm (you better have, also how would you even know that
 your bot works? <img
 src="https://cdn.discordapp.com/emojis/273981728899465216.png"
 style="vertical-align:middle"  width="24">)
@@ -228,8 +219,8 @@ You can now add these versions to your `package.json` file like in the example b
 
 ```json
 "engines": {
-    "node": "7.8.0",
-    "npm": "4.2.0"
+  "node": "8.x",
+  "npm": "*"
 },
 ```
 
@@ -242,8 +233,8 @@ Your `package.json` file should now look something like:
   "description": "An in-depth guide on deploying your Discord.js bot on Heroku",
   "main": "index.js",
   "engines": {
-      "node": "7.8.0",
-      "npm": "4.2.0"
+      "node": "8.x",
+      "npm": "*"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -282,8 +273,8 @@ under the `scripts` field, like the example below:
   "description": "An in-depth guide on deploying your Discord.js bot on Heroku",
   "main": "index.js",
   "engines": {
-      "node": "7.8.0",
-      "npm": "4.2.0"
+      "node": "8.x",
+      "npm": "*"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -317,7 +308,7 @@ You need to create a file named `Procfile` at the root directory of your
 application with the following contents:
 
 ```
-web: npm start
+worker: npm start
 ```
 
 ### Creating a `.gitignore` file
@@ -349,9 +340,7 @@ Now create an app with name `your-app-name` by running:
 $ heroku create your-app-name
 ```
 
-If `your-app-name` is available, Heroku will create an app under that name; once
-you set up a web app, you can visit your app's webpage at
-`https://your-app-name.herokuapp.com`.
+If `your-app-name` is available, Heroku will create an app under that name.
 
 Finally, add a Git remote named `heroku` pointing to Heroku:
 
@@ -417,97 +406,7 @@ $ heroku local
 The Heroku CLI will now run your app at http://localhost:5000/; if no errors are
 encountered, you're on the right track!
 
-## Building a web app
-
-To dodge Heroku's "sleep after 30 minutes of inactivity" limitation, you can
-build a web application to run alongside your bot. We'll be using the
-[Express](https://github.com/expressjs/express) web framework and the
-[EJS](https://www.npmjs.com/package/ejs) template engine to do so.
-
-### Installing dependencies
-
-Install the `express` and `ejs` dependencies with npm.
-
-```sh
-$ npm install express --save
-$ npm install ejs --save
-```
-
-Check if they were successfully installed by making sure there are `express` and
-`ejs` folders in the `node_modules` folder of your bot's root directory as well
-as being listed under the `dependencies` field in your `package.json` file.
-
-### Modifying `index.js`
-
-You need to modify your `index.js` file to host the web app alongside your bot
-by including the following content:
-
-```js
-const express = require('express');
-const app = express();
-
-// set the port of our application
-// process.env.PORT lets the port be set by Heroku
-const port = process.env.PORT || 5000;
-
-// set the view engine to ejs
-app.set('view engine', 'ejs');
-
-// make express look in the `public` directory for assets (css/js/img)
-app.use(express.static(__dirname + '/public'));
-
-// set the home page route
-app.get('/', (request, response) => {
-    // ejs render automatically looks in the views folder
-    response.render('index');
-});
-
-app.listen(port, () => {
-    // will echo 'Our app is running on http://localhost:5000 when run locally'
-    console.log('Our app is running on http://localhost:' + port);
-});
-```
-
-### Creating new files for the web app
-
-The first file that needs to be created is `views/index.ejs`, the home page of
-your web app. You can do so by running:
-
-```sh
-$ mkdir views
-$ touch views/index.ejs
-```
-
-Now, open the file in the default text editor by running:
-
-```sh
-$ open views/index.ejs
-```
-
-What you put in right now doesn't really matter, but if you want to take the
-time to add meaningful content to your webpage by following this
-[guide](https://coligo.io/templating-node-and-express-apps-with-ejs/) on using
-the EJS template engine with Express. A blank page will work for our purposes.
-
-**Tip**: You can add some nice styling to your page by including static assets in the
-`public` folder.
-
-### Keeping your dynos awake
-
-To prevent your dynos from going asleep, we can send GET requests to your page
-every 15 minutes or so to keep it active. We can do so by adding a `setInterval`
-function:
-
-```js
- // pings server every 15 minutes to prevent dynos from sleeping
-setInterval(() => {
-  http.get('http://your-app-name.herokuapp.com');
-}, 900000);
-```
-
-Now your bot will be up 24/7 until your hour limit for the month is reached.
-
-## Testing your app
+## Deploying your app
 
 If you're reading this part of the guide, you should have:
 
@@ -515,36 +414,23 @@ If you're reading this part of the guide, you should have:
 
 * setup your repository for Heroku deployment
 
-* created a web application to run alongside the bot
 
-You should now test your app locally by running:
-
-```
-$ heroku local
-```
-
-Keep the bot running for an hour, and see if it works consistently and doesn't
-fall asleep.
-
-If all is well (or you're too lazy to test locally), you should deploy your app
-to Heroku by running:
+If all goes well, you can now deploy your app to Heroku by running:
 
 ```sh
 $ git push heroku master
 ```
 
-If the app is deployed successfully and works consistently for about thre hours,
-congratulations! You've finished setting up, deploying to, and hosting your bot
-on Heroku!
+If the app is deployed successfully, congratulations! You've finished setting
+up, deploying to, and hosting your bot on Heroku!
 
 If you have some questions/feedback about this guide, you can message me on
-Discord at **synicalsyntax#9944**. Hope you enjoyed this guide! :)
+Discord at **synicalsyntax#9944**. Hope you found this guide helpful! :)
 
 ## Additional resources
 
 * [Free dyno hours](https://devcenter.heroku.com/articles/free-dyno-hours) —
-Additional information about Heroku's free plan, including details about
-automatic dyno sleeping after 30 minutes of inactivity and hour limits.
+Additional information about Heroku's free plan.
 
 * [Deploying Node.js apps on
 Heroku](https://devcenter.heroku.com/articles/deploying-nodejs) — The official
@@ -557,11 +443,6 @@ of your app.
 
 * [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
 — More documentation from your friends at Heroku to help you set up your app.
-
-* [How to Deploy a Node.js App to
-Heroku](https://scotch.io/tutorials/how-to-deploy-a-node-js-app-to-heroku) — The
-original tutorial on deploying the web application designed to run alongside
-your Discord.js bot.
 
 ## License
 
