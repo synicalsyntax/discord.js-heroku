@@ -77,13 +77,13 @@ interact with Heroku.
 This repository also contains several example files mentioned in this guide for
 you to use as references, including:
 
-* `package.json` ([link](https://github.com/synicalsyntax/discord.js-heroku/blob/master/package.json))
+* `package.json` ([link](https://github.com/synicalsyntax/discord.js-heroku/blob/web/package.json))
 
-* `Procfile` ([link](https://github.com/synicalsyntax/discord.js-heroku/blob/master/Procfile))
+* `Procfile` ([link](https://github.com/synicalsyntax/discord.js-heroku/blob/web/Procfile))
 
-* `.gitignore` ([link](https://github.com/synicalsyntax/discord.js-heroku/blob/master/.gitignore))
+* `.gitignore` ([link](https://github.com/synicalsyntax/discord.js-heroku/blob/web/.gitignore))
 
-* `index.js` ([link](https://github.com/synicalsyntax/discord.js-heroku/blob/master/index.js))
+* `index.js` ([link](https://github.com/synicalsyntax/discord.js-heroku/blob/web/index.js))
 
     This file contains the source code for the **Discord.js Heroku** bot on my
     [bot testing server](https://discord.gg/unYyTF9), which serves as a demo of
