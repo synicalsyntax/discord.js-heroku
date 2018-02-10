@@ -444,6 +444,9 @@ of your app.
 * [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
 — More documentation from your friends at Heroku to help you set up your app.
 
+* [Hosting an app on Heroku.com (Spanish)](http://www.craterdev.com/documentacion-mybot/alojando-bot-en-heroku.html)
+— Spanish translation of this guide by [@CraterMaik](https://github.com/CraterMaik).
+
 ## License
 
 [MIT License](https://github.com/synicalsyntax/discord.js-heroku/blob/master/LICENSE)
