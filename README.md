@@ -563,6 +563,9 @@ Heroku](https://scotch.io/tutorials/how-to-deploy-a-node-js-app-to-heroku) — T
 original tutorial on deploying the web application designed to run alongside
 your Discord.js bot.
 
+* [Hosting an app on Heroku.com (Spanish)](http://www.craterdev.com/documentacion-mybot/alojando-bot-en-heroku.html)
+— Spanish translation of this guide by [@CraterMaik](https://github.com/CraterMaik).
+
 ## License
 
 [MIT License](https://github.com/synicalsyntax/discord.js-heroku/blob/master/LICENSE)
