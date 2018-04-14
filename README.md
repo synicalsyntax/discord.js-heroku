@@ -47,7 +47,7 @@ to easily deploy any changes made to your bot:
     * **Integrate your app with GitHub** for automatic deployment of your bot
     whenever your configured GitHub repository is updated.
 
-* **Online and command line interface** — If you're not comfortable with using
+* **Online web and command line interface** — If you're not comfortable with using
 your command line interface, you can access your app through Heroku's web
 interface, and vice versa.
 
@@ -316,11 +316,76 @@ worker: npm start
 You should exclude some files from being checked in to Git/version control by
 specifying them in a `.gitignore` file. One example of files that should be
 excluded are those in the `node_modules` folder; not doing so results in a build
-process that takes *forever* because the build cache isn't be utilized.
+process that takes *forever* because the build cache can't be utilized.
 
 Download this Node `.gitignore`
 [template](https://github.com/github/gitignore/blob/master/Node.gitignore) from
 your buddies at GitHub and include it in the root directory of your bot.
+
+### Committing your files
+
+In order to deploy your application to Heroku, you need to stage and commit your
+files with Git.
+
+First, initialize an empty Git repository with the `git init` command.
+
+```sh
+$ git init
+Initialized empty Git repository in /path/to/discord.js-heroku/.git/
+```
+
+Next, run the `git status` command to make sure that you won't be accidentally
+checking in any extraneous files to Git (such as your `node_modules` folder).
+
+```sh
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.gitignore
+	LICENSE
+	Procfile
+	README.md
+	index.js
+	package-lock.json
+	package.json
+```
+
+If you see `node_modules` or any extraneous files under the **Untracked files**
+section, make sure to add them to your `.gitignore` file like we discussed
+in the previous step before moving on.
+
+Once you're ready to commit your changes, run the following command to stage and
+commit all of your files:
+
+```sh
+$ git add . && git commit -m 'Initial commit'
+[master (root-commit) 4a7552a] Initial commit
+ 7 files changed, 660 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 LICENSE
+ create mode 100644 Procfile
+ create mode 100644 README.md
+ create mode 100644 index.js
+ create mode 100644 package-lock.json
+ create mode 100644 package.json
+```
+
+To double check if you successfully made your commit or not, you can use the
+`git log` command to review your Git commit history.
+
+```sh
+$ git log
+commit 4a7552a7292c4faf23bdfbc6135ef3e13ed31487 (HEAD -> master)
+Author: synicalsyntax
+Date:   Sat Apr 14 11:11:49 2018 -0700
+
+    Initial commit
+```
 
 ### Creating a Heroku application
 
