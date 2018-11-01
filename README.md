@@ -311,6 +311,19 @@ application with the following contents:
 worker: npm start
 ```
 
+Make sure you are running you correct dyno - running it on worker and not on web. Read about diffrent dyons
+[here](https://devcenter.heroku.com/articles/dynos).
+You can check it by doing it on [Heroku](https://dashboard.heroku.com/apps)
+website under your app Resources tab or using commandline `heroku ps`. There should be only one worker dyno - 
+if not you can change it using UI or by following commands: 
+
+```sh
+$ heroku ps:scale web=0
+Scaling dynos... done, now running web at 0:Free
+$ heroku ps:scale worker=1
+Scaling dynos... done, now running worker at 1:Free
+```
+
 ### Creating a `.gitignore` file
 
 You should exclude some files from being checked in to Git/version control by
