@@ -311,19 +311,6 @@ application with the following contents:
 worker: npm start
 ```
 
-Make sure you are running you correct dyno - running it on worker and not on web. Read about diffrent dyons
-[here](https://devcenter.heroku.com/articles/dynos).
-You can check it by doing it on [Heroku](https://dashboard.heroku.com/apps)
-website under your app Resources tab or using commandline `heroku ps`. There should be only one worker dyno - 
-if not you can change it using UI or by following commands: 
-
-```sh
-$ heroku ps:scale web=0
-Scaling dynos... done, now running web at 0:Free
-$ heroku ps:scale worker=1
-Scaling dynos... done, now running worker at 1:Free
-```
-
 ### Creating a `.gitignore` file
 
 You should exclude some files from being checked in to Git/version control by
@@ -502,6 +489,31 @@ $ git push heroku master
 If the app is deployed successfully, congratulations! You've finished setting
 up, deploying to, and hosting your bot on Heroku!
 
+## Troubleshooting
+
+Sometimes mistakes happen and like with most programming related problem - the solution is reading logs and documentation. 
+To check your Heroku app logs you can use command `heroku logs --tail` and read what might be cause of your problem.
+
+In case you see following line in your logs:
+
+`Error R10 (Boot timeout) -> Web process failed to bind to $PORT within 60 seconds of launch`
+
+Then you should check if you are running your app correct dyno - It should running it on worker and not on web, 
+you can read about different types of dyons [here](https://devcenter.heroku.com/articles/dynos).
+To find out what kind on dyno your application is running you use can go to 
+[Heroku](https://dashboard.heroku.com/apps)
+website and check under your app Resources tab or using command line `heroku ps`. 
+There should be only one worker dyno - if not you can change it using UI or by following commands: 
+
+```sh
+$ heroku ps:scale web=0
+Scaling dynos... done, now running web at 0:Free
+$ heroku ps:scale worker=1
+Scaling dynos... done, now running worker at 1:Free
+```
+
+If that is not your problem then you need to do some debugging on your own - 
+it is impossible to predict all potential problems.
 If you have some questions/feedback about this guide, you can message me on
 Discord at **synicalsyntax#9944**. Hope you found this guide helpful! :)
 
