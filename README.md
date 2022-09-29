@@ -8,6 +8,22 @@ such as [discord.io](https://github.com/izy521/discord.io),
 [eris](https://github.com/abalabahaha/eris), and
 [discordie](https://github.com/qeled/discordie).
 
+## ⚠️ DEPRECATION NOTICE
+
+Unfortunately, the [free Heroku plan](https://www.heroku.com/free) will be completely discontinued starting on **November 28th, 2022**. As a result, this guide is henceforth deprecated.
+
+I am not familiar with other any reputable alternatives that can host bots for free, and thus cannot recommend switching to any in particular; if you are familiar with one, you are free to fork this repository and make the appropriate changes to this guide.
+
+Below is the original text of the guide preserved for posterity, especially for individuals that plan on continuing to host on paid Heroku plans. Do note that although the general setup process remains correct, some aspects of the guide are outdated (i.e. minimum Node version, sample `index.js`), so please take that into account when referencing this guide in the future.
+
+Finally, I'd like to thank you, the guide readers, for your continuous support over the past five years. When I first started this guide, I was a high school student that couldn't host on a dedicated server because I lacked disposable income, so I wrote the guide to help [discord.js support server](https://discord.gg/djs) users in a similar situation; I never expected it to be starred and forked over a hundred times. Because of this guide, my GitHub username also shows up over a thousand times in [various `package.json` files on GitHub](https://github.com/search?q=synicalsyntax&type=code) and [StackOverflow](https://stackoverflow.com/questions/52929264/parse-error-expected-another-key-value-pair/52955106); it's been really gratifying to see how many hobbyist projects I've been able to kickstart through it.
+
+Best of luck to all in the rest of their programming journeys.
+
+— Cynthia Lin (@synicalsyntax), September 2022
+
+---
+
 ## About
 
 ### About Heroku
